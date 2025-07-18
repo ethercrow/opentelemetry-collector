@@ -75,7 +75,7 @@ var availableDecoders = map[string]func(body io.ReadCloser) (io.ReadCloser, erro
 		var zr *zstd.Decoder
 		var err error
 		if v == nil {
-			zr, err = zstd.NewReader(body, zstd.WithDecoderConcurrency(2))
+			zr, err = zstd.NewReader(body, zstd.WithDecoderConcurrency(2), zstd.WithDecoderLowmem(true))
 		} else {
 			zr = v.(*zstd.Decoder)
 			err = zr.Reset(body)
